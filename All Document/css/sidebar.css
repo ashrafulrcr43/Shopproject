@@ -41,6 +41,7 @@
     border-right: 1px solid rgba(0,0,0,.075);
     scrollbar-color: #CCCCCC #F5F5F5;
     scrollbar-width: thin;
+    margin-top: 20px;
 }
 .side-nav-close {
     padding-top: 70px;
@@ -111,10 +112,10 @@
     padding: 15px 10px 15px 20px;
     width: 100% !important;
 }
-.side-bar-item:hover{
-    border-left: 4px solid #CB0C9F;
+.side-bar-item:hover {
+    border-bottom: 4px solid #51a960;
     transition: 0.2s;
-    background-color: #F3D9EC;
+    background-color: #000;
 }
 .side-bar-item:hover .side-bar-item-icon {
     color: #363B64;

@@ -1,3 +1,5 @@
+@extends('layout.app')
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-10 center-screen">
@@ -20,8 +22,8 @@
                                 <input id="lastName" placeholder="Last Name" class="form-control" type="text"/>
                             </div>
                             <div class="col-md-4 p-2">
-                                <label>Mobile Number</label>
-                                <input id="mobile" placeholder="Mobile" class="form-control" type="mobile"/>
+                                <label>Phone Number</label>
+                                <input id="phone" placeholder="phone" class="form-control" type="mobile"/>
                             </div>
                             <div class="col-md-4 p-2">
                                 <label>Password</label>
@@ -39,52 +41,48 @@
         </div>
     </div>
 </div>
-
 <script>
+   async function onRegistration(){
+        let email = document.getElementById("email").value;
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        let phone = document.getElementById("phone").value;
+        let password = document.getElementById("password").value;
 
-
-  async function onRegistration() {
-
-        let email = document.getElementById('email').value;
-        let firstName = document.getElementById('firstName').value;
-        let lastName = document.getElementById('lastName').value;
-        let mobile = document.getElementById('mobile').value;
-        let password = document.getElementById('password').value;
 
         if(email.length===0){
-            errorToast('Email is required')
-        }
-        else if(firstName.length===0){
-            errorToast('First Name is required')
-        }
-        else if(lastName.length===0){
-            errorToast('Last Name is required')
-        }
-        else if(mobile.length===0){
-            errorToast('Mobile is required')
-        }
-        else if(password.length===0){
-            errorToast('Password is required')
-        }
-        else{
-            showLoader();
-            let res=await axios.post("/user-registration",{
+            errorToast('Email is Required');
+        }else if(firstName.length===0){
+            errorToast('firstName is Required');
+        }else if(lastName.length===0){
+            errorToast('lastName is Required');
+        }else if(phone.length===0){
+            errorToast('mobile is Required');
+        }else if(password.length===0){
+            errorToast('Password is Required');
+        }else {
+            showLoader()
+            let res = await axios.post('/userRegistration',{
                 email:email,
                 firstName:firstName,
                 lastName:lastName,
-                mobile:mobile,
+                phone:phone,
                 password:password
+
             })
             hideLoader();
-            if(res.status===200 && res.data['status']==='success'){
-                successToast(res.data['message']);
-                setTimeout(function (){
-                    window.location.href='/userLogin'
-                },2000)
+            if(res.status===200 && res.data['status']=='success'){
+                successToast(res.data['message'])
+                setTimeout(function(){
+                     window.location.href="/userLogin"
+                },200)
+               
+            }else {
+                errorToast('Registration Failed');
             }
-            else{
-                errorToast(res.data['message'])
-            }
+            
         }
+
     }
 </script>
+@endsection

@@ -1,3 +1,5 @@
+@extends('layout.app')
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7 animated fadeIn col-lg-6 center-screen ">
@@ -23,31 +25,30 @@
         </div>
     </div>
 </div>
-
-
 <script>
+    async function SubmitLogin(){
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
 
-  async function SubmitLogin() {
-            let email=document.getElementById('email').value;
-            let password=document.getElementById('password').value;
+        if(email.length===0){
+            errorToast('Email is Required')
+        }else if(password.length===0){
+            errorToast('password is Required')
+        }else {
+            showLoader()
+            let res = await axios.post('/userLogin',{
+                email:email,
+                password: password
+            })
+            if(res.status === 200 && res.data['status']=='success'){
+                successToast('Login Success')
+                window.location.href="/dashboard"
+            }else {
+                errorToast('Login Failed')
+            }
+        }
 
-            if(email.length===0){
-                errorToast("Email is required");
-            }
-            else if(password.length===0){
-                errorToast("Password is required");
-            }
-            else{
-                showLoader();
-                let res=await axios.post("/user-login",{email:email, password:password});
-                hideLoader()
-                if(res.status===200 && res.data['status']==='success'){
-                    window.location.href="/dashboard";
-                }
-                else{
-                    errorToast(res.data['message']);
-                }
-            }
+
     }
-
 </script>
+@endsection

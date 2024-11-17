@@ -12,6 +12,28 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
+    //Font End Development
+    public function loginPage(){
+        return view('pages.auth.login');
+    }
+    public function registration(){
+        return view('pages.auth.registration');
+    }
+    public function sendotp(){
+        return view('pages.auth.sendotp');
+    }
+
+    public function varifyOtp(){
+        return view('pages.auth.varifyotp');
+    }
+    public function passwordReset(){
+        return view('pages.auth.passwordReset');
+    }
+    public function uerProfilePage(){
+        return view('pages.dashboard.profile-form');
+    }
+
+   //Back End Developemnt  
     public function userRegistration(Request $request){
         try {
             User::create([
@@ -24,33 +46,33 @@ class UserController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'User Registration Successfully'
-            ]);
+            ],200);
         }
         catch (Exception $e){
             return response()->json([
-                'status'=>'Faild',
-                'message'=>'User Registration Failed'
+            'status' => 'failed', 
+            'message'=>'User Registration Failed'
             ]);
         }
        
     }
     public function userLogin(Request $request){
-        $count = User::where('email',$request->email)
-        ->where('password',$request->password)
-        ->count();
+        $count = User::where('email',$request->input('email'))
+        ->where('password',$request->input('password'))
+        ->select('id')->first();
 
-        if($count==1){
+        if($count !==null){
             //user-login-jwt-token-issue
-            $token =JWTToken::createToken($request->email);
+            $token =JWTToken::createToken($request->input('email'),$count->id);
             return response()->json([
                 'status'=>'success',
                 'message'=>'user login successful',
-                'token'=>$token
-            ]);
+                // 'token'=>$token
+            ])->cookie('token',$token,60*24*30);
 
         }else{
             return response()->json([
-                'status'=>'faild',
+                'status'=>'Failed',
                 'message'=>'unauthorized'
             ]);
         }
@@ -66,7 +88,7 @@ class UserController extends Controller
             //otp Database store korta hoba
             User::where('email','=',$email)->update(['otp' => $otp]);
             return response()->json([
-                 'status'=>'success',
+                'status'=>'success',
                 'Message'=>'4 Digit Otp Send Successfully'
             ]);
         }else {
@@ -80,22 +102,24 @@ class UserController extends Controller
     public function verifyOtp(Request $request){
         $email = $request->input('email');
         $otp = $request ->input('otp');
-        $count = User::where('email','=',$email)
-            ->where('otp','=',$otp)->count();
-        if($count){
-            
+        $count = User::
+        where('email','=',$email)
+            ->where('otp','=',$otp)
+            ->count();
+        if($count===1){
+            User::where('email','=',$email)->update(['otp'=>'0']);
             // create Token for Rest Password
-            $token = JWTToken::createTokenForSetPassword($request->email);
+            $token = JWTToken::createTokenForSetPassword($email);
             return response()->json([
                 'status'=>'success',
                 'message'=>'Token Create Successfully',
-                'token'=>$token
-            ]);
+               
+            ],200)->cookie('token',$token,60*24*30);
 
         }else {
             return response()->json([
                 'status'=>'Failed',
-                'Message'=>'unauthorized'
+                'message'=>'unauthorized'
             ]);
         }
 
@@ -103,7 +127,7 @@ class UserController extends Controller
     public function restPasword(Request $request){
         try{
         $email =$request->header('email');
-          $password = $request->input('password');
+        $password = $request->input('password');
         User::where('email','=',$email)->update(['password'=> $password]);
         return response()->json([
             'status'=>'success',
@@ -114,10 +138,51 @@ class UserController extends Controller
              {
                 return response()->json([
                     'status'=>'Failed',
-                    'Message'=>'unauthorized'
+                    'message'=>'unauthorized'
                 ]);
         }
        
     }
     }
+    public function userLogout(){
+        return redirect("/userLogin")->cookie('token','',-1);
+    }
+
+    // user Detailes
+    public function userProfile(Request $request){
+        $email =$request->header('email');
+        $User= User::where('email','=',$email)->first();
+        return response()->json([
+            'status'=>'success',
+            'message'=>'User Update Successfully',
+            'data'=>$User
+        ]);
+    }
+
+    public function userProfileUpdate(Request $request){
+        try{
+            $email = $request->header('email');
+            $firstName= $request->input('firstName');
+            $lastName= $request->input('lastName');
+            $phone= $request->input('phone');
+            $password= $request->input('password');
+
+            User::where('email','=',$email)->update([
+                'firstName'=>$firstName,
+                'lastName'=>$lastName,
+                'phone'=>$phone,
+                'password'=>$password
+            ]);
+            return response()->json([
+             'status'=>'success',
+             'message'=>'User Profile Update Successfully'
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status'=>'Fail',
+                'message'=>'somthing wrong'
+            ]);
+        }
+    }
+  
 }

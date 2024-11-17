@@ -3,6 +3,10 @@
 @import "progress.css";
 @import "dropdownmenu.css";
 
+.brodertyle {
+  border-right: 5px solid blueviolet;
+
+}
 .card-img-top {
     width: 100%;
     height: 20vw;

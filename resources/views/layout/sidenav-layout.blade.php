@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title></title>
+    <title>Sales Inventory</title>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('/favicon.ico') }}" />
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
@@ -21,11 +21,12 @@
     <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 
-
+    
     <script src="{{ asset('js/toastify-js.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/config.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
+  
 
 </head>
 
@@ -134,8 +135,6 @@
         @yield('content')
     </div>
 
-
-
     <script>
         function MenuBarClickHandler() {
             let sideNav = document.getElementById('sideNavRef');
@@ -152,8 +151,8 @@
                 content.classList.add("content");
             }
         }
-    </script>
 
+    </script>
 
     
 </body>
