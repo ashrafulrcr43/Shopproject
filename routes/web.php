@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\TokenVerifyMiddleware;
+use App\Http\Controllers\Customers;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,5 +70,34 @@ Route::get('categorylist',[CategoryController::class, 'categoryList'])
  
  Route::post('categoryById',[CategoryController::class, 'categoryById'])
  ->middleware([TokenVerifyMiddleware::class]);
+
+//  Customer Api
+Route::get('/customerpage',[Customers::class,'CustomerPage'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/createcustomer',[Customers::class,'CustomerCreate'])
+->middleware([TokenVerifyMiddleware::class]);
+
+Route::get('/customerlist',[Customers::class,'CustomerList'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/customerlist',[Customers::class,'CustomerList'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/customerdelete',[Customers::class,'CustomerDelete'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/customerupdate',[Customers::class,'CustomerUpdate'])
+->middleware([TokenVerifyMiddleware::class]);
+ Route::post('/customer-by-id',[Customers::class,'CustomerByID'])
+->middleware([TokenVerifyMiddleware::class]);
  
- 
+//  Product Api
+Route::get('/productPage',[productController::class, 'ProductPage'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/ProductCreate',[productController::class, 'ProductCreate'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/DeleteProduct',[productController::class, 'DeleteProduct'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/ProductId',[productController::class, 'ProductId'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/UpdateProduct',[productController::class, 'UpdateProduct'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::get('/ProductList',[productController::class, 'ProductList'])
+->middleware([TokenVerifyMiddleware::class]);

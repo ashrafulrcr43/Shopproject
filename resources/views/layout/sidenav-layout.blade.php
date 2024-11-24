@@ -20,14 +20,12 @@
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-
     
     <script src="{{ asset('js/toastify-js.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/config.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
   
-
 </head>
 
 <body>
@@ -113,7 +111,7 @@
             <i class="bi bi-currency-dollar bg-gradient-success shadow "></i>
             <span class="side-bar-item-caption text-white">Create Sale</span>
         </a>
-        <a href="{{ url('/customerPage') }}" class="side-bar-item">
+        <a href="{{ url('/customerpage') }}" class="side-bar-item">
             <i class="bi bi-people bg-gradient-success shadow "></i>
             <span class="side-bar-item-caption text-white">Customer</span>
         </a>

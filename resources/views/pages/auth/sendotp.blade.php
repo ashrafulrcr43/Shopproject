@@ -6,7 +6,7 @@
             <div class="card animated fadeIn w-90  p-4">
                 <div class="card-body">
                     <h4>EMAIL ADDRESS</h4>
-                    <br/>
+                    <span class="mb-2">Enter your email address, the email address you used to log in with.</span>
                     <label>Your email address</label>
                     <input id="email" placeholder="User Email" class="form-control" type="email"/>
                     <br/>

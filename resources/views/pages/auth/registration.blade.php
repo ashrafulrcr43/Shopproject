@@ -5,7 +5,35 @@
         <div class="col-md-10 col-lg-10 center-screen">
             <div class="card animated fadeIn w-100 p-3 brodertyle">
                 <div class="card-body">
-                    <h4>Sign Up</h4>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h4>Registration</h4>
+                        </div>
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Orange dot with pulsing effect -->
+                                <circle cx="20" cy="25" r="5" fill="#FF6A00">
+                                    <animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite" />
+                                    <animate attributeName="fill-opacity" values="1;0.5;1" dur="1s"
+                                        repeatCount="indefinite" />
+                                </circle>
+            
+                                <!-- .X text with sliding animation -->
+                                <text x="35" y="30" font-family="Arial, sans-serif" font-size="24" fill="#002855">
+                                    <tspan>.E-</tspan>
+                                </text>
+            
+                                <!-- Shop text with horizontal movement -->
+                                <text x="65" y="30" font-family="Arial, sans-serif" font-size="24" fill="#002855">
+                                    <tspan>
+                                        <animate attributeName="x" values="65; 75; 65" dur="1.5s" repeatCount="indefinite" />
+                                        Shop
+                                    </tspan>
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
+                   
                     <hr/>
                     <div class="container-fluid m-0 p-0">
                         <div class="row m-0 p-0">
@@ -31,8 +59,19 @@
                             </div>
                         </div>
                         <div class="row m-0 p-0">
-                            <div class="col-md-4 p-2">
-                                <button onclick="onRegistration()" class="btn mt-3 w-100  bg-gradient-info">Complete</button>
+                            <div class="col-md-6 p-2">
+                                <div class="row d-flex justify-content-around">
+                                    <div class="col-md-4">
+                                        <button onclick="onRegistration()" class="btn mt-3 w-100  bg-gradient-info">Complete</button>
+                                    </div>
+                                    <div class="col-md-4 text-center mt-3">
+                                        <h3>OR</h3>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <a class="text-center btn w-100 bg-gradient-success" href="{{url('/userLogin')}}">Login </a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
