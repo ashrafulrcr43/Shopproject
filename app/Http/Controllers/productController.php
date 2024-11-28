@@ -41,16 +41,15 @@ class productController extends Controller
         $product_id = $request->input('id');
         $filePath = $request->input('file_path');
         File::delete( $filePath);
-        return product::where('id',$user_id)->where('id', $product_id)->delete();
+        return product::where('user_id',$user_id)->where('id', $product_id)->delete();
     }
 
     public function ProductId(Request $request){
         $user_id =$request->header('id');
         $product_id = $request->input('id');
-        return product::where('id', $user_id )->where('id', $product_id)->first();
+        return product::where('user_id', $user_id )->where('id', $product_id)->first();
     }
     public function UpdateProduct(Request $request){
-        dd($request->all(), $request->file('img'));
         $user_id =$request->header('id');
         $product_id = $request->input('id');
 
@@ -66,18 +65,19 @@ class productController extends Controller
             $filePath=$request->input('file_path');
             File::delete($filePath);
             return Product::where('id',$product_id)->where('user_id',$user_id)->update([
-              'name'=>$request->input('name'),
+            'name'=>$request->input('name'),
             'price'=>$request->input('price'),
             'unit'=>$request->input('unit'),
             'img_url'=>$imageUrl,
             'category_id'=>$request->input('category_id'),
             ]);
         }else{
-            return Product::where('id',$product_id)->where('user_id',$user_id)->update([
+            return Product::where('id',$product_id)
+            ->where('user_id',$user_id)->update([
             'name'=>$request->input('name'),
-              'price'=>$request->input('price'),
-              'unit'=>$request->input('unit'),
-              'category_id'=>$request->input('category_id'),
+            'price'=>$request->input('price'),
+            'unit'=>$request->input('unit'),
+            'category_id'=>$request->input('category_id'),
               ]);
         }
     }

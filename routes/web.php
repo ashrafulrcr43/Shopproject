@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\TokenVerifyMiddleware;
 use App\Http\Controllers\Customers;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,4 +101,19 @@ Route::post('/ProductId',[productController::class, 'ProductId'])
 Route::post('/UpdateProduct',[productController::class, 'UpdateProduct'])
 ->middleware([TokenVerifyMiddleware::class]);
 Route::get('/ProductList',[productController::class, 'ProductList'])
+->middleware([TokenVerifyMiddleware::class]);
+
+//Invoice Route
+Route::get('/InvoicePage',[InvoiceController::class, 'InvoicePage'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::get('/SalesPage',[InvoiceController::class, 'SalesPage'])
+->middleware([TokenVerifyMiddleware::class]);
+
+Route::post('/invoice-create',[InvoiceController::class, 'CreateInvoice'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/Select-Invoice',[InvoiceController::class, 'SelectInvoice'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/Details-Invoice',[InvoiceController::class, 'DetailsInvoice'])
+->middleware([TokenVerifyMiddleware::class]);
+Route::post('/Delete-Invoice',[InvoiceController::class, 'DeleteInvoice'])
 ->middleware([TokenVerifyMiddleware::class]);
