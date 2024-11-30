@@ -107,7 +107,7 @@
             <span class="side-bar-item-caption text-white">Product</span>
         </a>
 
-        <a href="{{ url('/salePage') }}" class="side-bar-item">
+        <a href="{{ url('/SalesPage') }}" class="side-bar-item">
             <i class="bi bi-currency-dollar bg-gradient-success shadow "></i>
             <span class="side-bar-item-caption text-white">Create Sale</span>
         </a>
